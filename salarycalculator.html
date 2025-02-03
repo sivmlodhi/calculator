@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #000000e5, #007bff);
+            color: rgb(0, 0, 0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label, button {
+            display: block;
+            margin: 10px 0;
+        }
+        input[type="number"] {
+            width: 90%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #218838;
+            text-align: center;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .btn-group button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-group button:hover {
+            background-color: #0056b3;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        
+        <h1>Simple Salary Calculator</h1>
+        <label for="hours">Enter Your Total Working Hours:</label>
+        <input type="number" id="hours" placeholder="Working Hours">
+
+        <label>Select Your Category:</label>
+        <div class="btn-group">
+            <button onclick="setCategory(10000)">Average</button>
+            <button onclick="setCategory(15000)">Good</button>
+            <button onclick="setCategory(20000)">Excellence</button>
+        </div>
+
+        <label>Select Your Shift:</label>
+        <div class="btn-group">
+            <button onclick="setShift(0)">Morning Shift</button>
+            <button onclick="setShift(3000)">Evening Shift</button>
+        </div>
+
+        <button onclick="calculateSalary()">Calculate Salary</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let categoryValue = 0;
+        let shiftValue = 0;
+
+        function setCategory(value) {
+            categoryValue = value;
+        }
+
+        function setShift(value) {
+            shiftValue = value;
+        }
+
+        function calculateSalary() {
+            const hours = parseFloat(document.getElementById('hours').value);
+            const result = document.getElementById('result');
+
+            if (isNaN(hours) || hours <= 0) {
+                result.textContent = "Please enter valid working hours.";
+                return;
+            }
+
+            if (categoryValue === 0) {
+                result.textContent = "Please select a category.";
+                return;
+            }
+
+            const salary = ((categoryValue + shiftValue) / 160) * hours;
+            result.textContent = `Your Estimated Salary: ₹${salary.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
